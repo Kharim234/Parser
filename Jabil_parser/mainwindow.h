@@ -18,7 +18,10 @@ public:
 private slots:
     void on_pushButton_Parse_File_clicked();
 
+
 private:
     Ui::MainWindow *ui;
+    void parse_for_limits_and_show_them(QString String_with_limits);
+    void show_string_list_in_one_line(QStringList List);
 };
 #endif // MAINWINDOW_H
