@@ -39,8 +39,7 @@ void MainWindow::show_string_list_in_one_line(QStringList List){
     }
     ui->textBrowser->append(Whole_line);
 }
-void MainWindow::on_pushButton_Parse_File_clicked()
-{
+QString MainWindow::Read_file(){
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Select log files"), "/home/jana", tr("Log files (*.xdcf *.*)"));
     ui->textBrowser->clear();
@@ -49,16 +48,28 @@ void MainWindow::on_pushButton_Parse_File_clicked()
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
         ui->textBrowser->append("File read error");
-        return;
+        return "";
     }
     m_Parse_file_path += fileName;
 
-    QByteArray Text_in_file = file.readAll();
+    QString Text_in_file = file.readAll();
     file.close();
+    return Text_in_file;
+
+}
+void MainWindow::on_pushButton_Parse_File_clicked()
+{
+
 
     Parser_files external_parser, internal_parser;
     int file_index;
     QString Parsed_string;
+
+    QString Text_in_file = this->Read_file();
+    if(Text_in_file.length() == 0){
+        return;
+    }
+
     QStringList Limits_to_parse = {"subDesignator","upper", "nominal", "lower"};
     QString external_XML_mark_string_to_parse = "limits";
 
