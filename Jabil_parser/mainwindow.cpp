@@ -93,7 +93,7 @@ void MainWindow::on_pushButton_Parse_File_clicked()
         return;
     }
 
-    QStringList Limits_to_parse = {"subDesignator","upper", "nominal", "lower"};
+    QStringList Limits_to_parse = {"designator","subDesignator","upper", "nominal", "lower"};
     QString external_XML_mark_string_to_parse = "limits";
 
     if(external_parser.Parse_string(external_XML_mark_string_to_parse,Text_in_file) > 0){
